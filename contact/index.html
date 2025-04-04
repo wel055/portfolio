@@ -3,22 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact - Wenxi Li</title>
-  <!-- Go up one folder for style.css -->
+  <!-- Link back up one directory to get style.css -->
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <!-- Navigation menu -->
+  <!-- Navigation -->
   <nav>
     <ul>
       <li><a href="../index.html">Home</a></li>
       <li><a href="../projects/index.html">Projects</a></li>
       <li><a href="index.html">Contact</a></li>
-      <li><a href="https://github.com/wel055" target="_blank">GitHub</a></li>
+      <li><a href="https://github.com/YourGitHubUsername" target="_blank">GitHub</a></li>
     </ul>
   </nav>
 
-  <!-- Page content -->
   <h1>Contact</h1>
-  <p>Welcome to my contact page! (Add your contact info here)</p>
+
+  <!-- Contact Form -->
+  <form action="mailto:wel055@ucsd.edu" method="POST" enctype="text/plain">
+    <!-- Email field -->
+    <label for="email">Email:</label>
+    <input 
+      type="email" 
+      name="email" 
+      id="email" 
+      value="someone@example.com"
+    >
+    <br><br>
+
+    <!-- Subject field -->
+    <label for="subject">Subject:</label>
+    <input 
+      type="text" 
+      name="subject" 
+      id="subject" 
+      value="Hello!"
+    >
+    <br><br>
+
+    <!-- Message body -->
+    <label for="body">Body:</label>
+    <textarea 
+      name="body" 
+      id="body" 
+      rows="5" 
+      cols="30"
+    >Your message here</textarea>
+    <br><br>
+
+    <!-- Submit button -->
+    <button>Send</button>
+  </form>
+
 </body>
 </html>
