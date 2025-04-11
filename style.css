@@ -8,3 +8,40 @@ body {
     padding: 1rem;
     margin-inline: max(1em, (100% - 100ch) / 2);
   }
+
+/* Remove default list styling and spacing */
+nav ul {
+  list-style: none;       /* no bullets */
+  margin: 0;
+  padding: 0;
+
+  /* Turn the list items into a flexible row */
+  display: flex;
+  gap: 1rem; /* space between nav items */
+}
+
+nav ul li {
+  flex: 1;
+  text-align: center;
+}
+
+/* Remove link underlines and set color */
+nav a {
+  text-decoration: none;
+  color: inherit; /* inherit from parent (body or nav) */
+  text-align: center;
+  padding: 0.5em; /* some padding for clickable area */
+}
+
+/* Add a bottom border to separate nav from the page */
+nav {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem; /* space below nav */
+  padding-bottom: 0.5rem; /* extra spacing to keep link text away from border */
+}
+
+/* Highlight the 'current' page link */
+nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 200); /* thicker bottom border */
+  padding-bottom: 0.1em; /* adjust to offset the thicker border */
+}
