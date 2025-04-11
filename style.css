@@ -3,4 +3,8 @@ body {
          and use the OS’s UI font as the website font
        */
     font: 100%/1.5 system-ui;
+    max-width: 100ch;
+    margin: 0 auto;  /* to center the content horizontally */
+    padding: 1rem;
+    margin-inline: max(1em, (100% - 100ch) / 2);
   }
