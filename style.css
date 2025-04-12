@@ -1,47 +1,215 @@
+/* 1. Define the accent color on :root so everything can inherit it */
+:root {
+  --color-accent: oklch(65% 50% 0); /* a pinkish accent, for example */
+}
+
 body {
-    /* Set line height to 1.5 times the font size
-         and use the OS’s UI font as the website font
-       */
-    font: 100%/1.5 system-ui;
-    max-width: 100ch;
-    margin: 0 auto;  /* to center the content horizontally */
-    padding: 1rem;
-    margin-inline: max(1em, (100% - 100ch) / 2);
-  }
+  /* Set line height to 1.5 times the font size
+       and use the OS’s UI font as the website font
+     */
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin: 0 auto;  /* to center the content horizontally */
+  padding: 1rem;
+  margin-inline: max(1em, (100% - 100ch) / 2);
+}
 
 /* Remove default list styling and spacing */
 nav ul {
-  list-style: none;       /* no bullets */
-  margin: 0;
-  padding: 0;
+list-style: none;       /* no bullets */
+margin: 0;
+padding: 0;
 
-  /* Turn the list items into a flexible row */
-  display: flex;
-  gap: 1rem; /* space between nav items */
+/* Turn the list items into a flexible row */
+display: flex;
+gap: 1rem; /* space between nav items */
 }
 
 nav ul li {
-  flex: 1;
-  text-align: center;
+flex: 1;
+text-align: center;
 }
 
 /* Remove link underlines and set color */
 nav a {
-  text-decoration: none;
-  color: inherit; /* inherit from parent (body or nav) */
-  text-align: center;
-  padding: 0.5em; /* some padding for clickable area */
+text-decoration: none;
+color: inherit; /* inherit from parent (body or nav) */
+text-align: center;
+padding: 0.5em; /* some padding for clickable area */
 }
 
 /* Add a bottom border to separate nav from the page */
 nav {
-  border-bottom: 1px solid oklch(80% 3% 200)
-  margin-bottom: 1rem; /* space below nav */
-  padding-bottom: 0.5rem; /* extra spacing to keep link text away from border */
+border-bottom: 1px solid oklch(80% 3% 200)
+margin-bottom: 1rem; /* space below nav */
+padding-bottom: 0.5rem; /* extra spacing to keep link text away from border */
 }
 
 /* Highlight the 'current' page link */
 nav a.current {
-  border-bottom: 0.4em solid oklch(80% 3% 200); /* thicker bottom border */
-  padding-bottom: 0.1em; /* adjust to offset the thicker border */
+border-bottom: 0.4em solid oklch(80% 3% 200); /* thicker bottom border */
+padding-bottom: 0.4em; /* adjust to offset the thicker border */
+}
+
+nav a:hover:not(.current) {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h)
+}
+
+form label,
+form input,
+form textarea,
+form button {
+  display: block;         /* full-width “block” boxes */
+  font: inherit;          /* inherit the site font, see Step 3.1 */
+  box-sizing: border-box; /* ensures width includes padding & border */
+}
+
+/* 2) Labels: space them out slightly */
+form label {
+  margin-block: 0.5em;    /* add top/bottom spacing for clarity */
+  font-weight: bold;      /* optional: make labels bold */
+}
+
+/* 3) Form inputs: take full width, add spacing below them */
+form input,
+form textarea {
+  width: 100%;            /* fill the container’s width */
+  margin-block-end: 1em;  /* spacing after each control */
+  padding: 0.5em;         /* a bit of padding inside for comfort */
+}
+
+/* 4) Button: match the width or keep it smaller, up to you */
+form button {
+  /* Option A: make the button full-width */
+  width: 100%;
+  /* Option B: remove width: 100%; to let it size to content. */
+
+  padding: 0.5em 1em;
+  cursor: pointer;        /* show hand pointer on hover */
+}
+
+
+/* Alternative: Grid form */
+form {
+  display: grid;
+  gap: 1em; /* spacing between rows/columns */
+  grid-template-columns: auto 1fr; /* first column auto-sized, second fills the rest */
+}
+
+form label {
+  /* place label text in column 1 */
+  grid-column: 1;
+  /* if you want the label to align to the end horizontally: 
+     text-align: right;
+  */
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  grid-column: 2; /* place controls in the second column */
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+form button {
+  grid-column: 1 / -1; /* make the button span the full width */
+  justify-self: center; /* center the button horizontally */
+  padding: 0.5em 1em;
+}
+
+/* Projects grid container */
+.projects {
+  /* 1) Make it a grid container */
+  display: grid;
+
+  /* 2) Add gap (the space between grid items) */
+  gap: 1rem;
+
+  /* 3) Responsive columns:
+        - "auto-fill" to create as many columns as fit 
+        - each column has a minimum width of 15em 
+          and a max of 1fr (taking remaining space)
+  */
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  
+  /* Optional: add some top/bottom margin if you want spacing before the grid */
+  margin-top: 2rem;
+}
+
+/* Style each project article if needed */
+.projects article {
+  border: 1px solid #ccc;   /* subtle border around each item */
+  padding: 1rem;
+  background-color: #f9f9f9; /* light background for contrast */
+
+  display: grid;
+  grid-template-rows: subgrid; /* Tells it to reuse the parent's row tracks */
+  grid-row: span 3;
+}
+
+/* Make the placeholder images responsive by default */
+.projects article img {
+  width: 100%;
+  height: auto;
+  display: block; /* remove extra whitespace below images */
+}
+
+/* Adjust headings & paragraphs */
+.projects article h2 {
+  margin: 0;        /* Avoid extra spacing that can misalign content */
+  line-height: 1.1; /* Tighter line spacing for headings */
+}
+
+h1 {
+  font-size: 400%;
+  margin: 0.2em 0;    /* small top/bottom margin */
+}
+
+/* For all headings (h1–h6), unify line-height and text-wrap */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  /* `text-wrap: balance;` can help even out multi-line headings, 
+     but it only works in some modern browsers */
+  text-wrap: balance;
+}
+
+section article {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-block: 1rem; /* spacing between articles */
+  border-radius: 0.25rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+section article:hover {
+  background-color: #fafafa;
+  border-color: var(--accent-color);
+}
+
+section ul {
+  padding-left: 1.5rem; /* indentation */
+  margin-bottom: 1rem;
+}
+
+section ul li {
+  margin-block: 0.5rem;
+  line-height: 1.4;
+}
+
+/* Links in the publications list */
+section ul li a {
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--accent-color);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+section ul li a:hover {
+  color: inherit;
+  background-color: var(--accent-color);
+  border-bottom: 1px solid transparent;
+  padding: 0 0.15em; /* highlight effect */
 }
