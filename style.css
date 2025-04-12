@@ -35,7 +35,7 @@ nav a {
 
 /* Add a bottom border to separate nav from the page */
 nav {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid oklch(80% 3% 200)
   margin-bottom: 1rem; /* space below nav */
   padding-bottom: 0.5rem; /* extra spacing to keep link text away from border */
 }
