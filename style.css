@@ -185,7 +185,7 @@ section article {
 }
 
 section article:hover {
-  background-color: #fafafa;
+  background-color: inherit;
   border-color: var(--accent-color);
 }
 
