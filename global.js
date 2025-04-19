@@ -71,3 +71,41 @@ const pages = [
         – remove if you already have nav styles in CSS            */
   nav.style.display = "flex";
   nav.style.gap = "1rem";
+
+/* 1. Inject the <label><select>… HTML at the top of <body> */
+document.body.insertAdjacentHTML(
+    "afterbegin",
+    `
+    <label class="color-scheme">
+      Theme:
+      <select>
+        <option value="auto">Automatic</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+    </label>`
+  );
+  
+  const select = document.querySelector(".color-scheme select");
+  
+  /* 2. If the user chose a scheme before, restore it */
+  const saved = localStorage.colorScheme || "auto";
+  select.value = saved;
+  applyScheme(saved);
+  
+  /* 3. React when the user changes the dropdown */
+  select.addEventListener("input", e => {
+    const mode = e.target.value;          // "auto" | "light" | "dark"
+    localStorage.colorScheme = mode;      // persist
+    applyScheme(mode);
+  });
+  
+  /* Helper: set or clear the css property on <html> */
+  function applyScheme(mode) {
+    const rootStyle = document.documentElement.style;
+    if (mode === "auto") {
+      rootStyle.removeProperty("color-scheme");   // back to OS preference
+    } else {
+      rootStyle.setProperty("color-scheme", mode); // force light or dark
+    }
+  }

@@ -229,3 +229,17 @@ input, textarea, button { color: inherit; }
 
 /* publications list hover: match body text in dark mode */
 section ul li a:hover { color: canvastext; }
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  font-size: 80%;
+  font-family: inherit;   /* match page font */
+  color: canvastext;      /* adapts in light/dark */
+}
+
+.color-scheme select {
+  font: inherit;
+}
