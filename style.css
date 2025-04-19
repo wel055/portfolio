@@ -243,3 +243,17 @@ section ul li a:hover { color: canvastext; }
 .color-scheme select {
   font: inherit;
 }
+
+/* switcher = <label class="color‑scheme"><select>… */
+.color-scheme{
+  position: fixed;          /* stay in viewport even when scrolling   */
+  top: 1rem;                /* 1 rem from the top                     */
+  right: 1rem;              /* 1 rem from the right edge              */
+  font: 80%/1 inherit;      /* slightly smaller, same font as body    */
+  color: canvastext;        /* adapts automatically in dark / light   */
+  z-index: 1000;            /* sit above everything else              */
+}
+
+.color-scheme select{
+  font: inherit;            /* keep font consistent                   */
+}
