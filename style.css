@@ -3,6 +3,8 @@
   --color-accent: oklch(65% 50% 0); /* a pinkish accent, for example */
 }
 
+html { color-scheme: light dark; }
+
 body {
   /* Set line height to 1.5 times the font size
        and use the OS’s UI font as the website font
@@ -40,20 +42,25 @@ padding: 0.5em; /* some padding for clickable area */
 
 /* Add a bottom border to separate nav from the page */
 nav {
-border-bottom: 1px solid oklch(80% 3% 200)
-margin-bottom: 1rem; /* space below nav */
-padding-bottom: 0.5rem; /* extra spacing to keep link text away from border */
+  /* NEW: one variable that works in both schemes: 40 %‑opaque dark teal */
+  --border-color: oklch(50% 10% 200 / 40%);
+
+  border-bottom: 1px solid var(--border-color);   /* ← semicolon was missing */
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 /* Highlight the 'current' page link */
 nav a.current {
-border-bottom: 0.4em solid oklch(80% 3% 200); /* thicker bottom border */
-padding-bottom: 0.4em; /* adjust to offset the thicker border */
+  border-bottom: 0.4em solid var(--border-color);
+  padding-bottom: 0.1em;
 }
 
 nav a:hover:not(.current) {
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: oklch(from var(--color-accent) 95% 5% h)
+
+  /* NEW: mix accent with the page background so it’s subtle in both modes */
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
 form label,
@@ -213,3 +220,12 @@ section ul li a:hover {
   border-bottom: 1px solid transparent;
   padding: 0 0.15em; /* highlight effect */
 }
+
+/* optional: inputs inherit text colour for dark mode */
+input, textarea, button { color: inherit; }
+
+/* project card border match nav tone */
+.projects article { border-color: var(--border-color); }
+
+/* publications list hover: match body text in dark mode */
+section ul li a:hover { color: canvastext; }
