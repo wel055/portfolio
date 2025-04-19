@@ -24,3 +24,50 @@ const currentLink = navLinks.find(a =>
 
 /* 4. Add the highlight class (only if a match was found) */
 currentLink?.classList.add("current");
+
+/* 1. Site pages (add / edit as needed) */
+const pages = [
+    { url: "",            title: "Home"     },
+    { url: "projects/",   title: "Projects" },
+    { url: "cv/",         title: "CV"       },
+    { url: "contact/",    title: "Contact"  },
+    { url: "https://github.com/YourGitHubUsername", title: "GitHub" }
+  ];
+  
+  /* 2. Detect whether we’re on localhost or GitHub Pages ⇒ set BASE_PATH */
+  const BASE_PATH =
+    location.hostname === "localhost" || location.hostname === "127.0.0.1"
+      ? "/"                              // local dev
+      : "/portfolio/";                   // repo name on GitHub Pages
+  
+  /* 3. Helper to normalise “/” vs “/index.html” */
+  const norm = p => p.replace(/\/index\.html$/i, "/").replace(/\/+$/, "/");
+  
+  /* 4. Create <nav> and insert it at the very top of <body> */
+  const nav = document.createElement("nav");
+  document.body.prepend(nav);
+  
+  /* 5. Build links */
+  for (const { url: rawURL, title } of pages) {
+    /* If the URL is relative, prepend BASE_PATH */
+    const url = rawURL.startsWith("http") ? rawURL : BASE_PATH + rawURL;
+  
+    const a = document.createElement("a");
+    a.href = url;
+    a.textContent = title;
+  
+    /* Open external links in a new tab */
+    if (a.host !== location.host) a.target = "_blank";
+  
+    /* Highlight the current page link */
+    if (a.host === location.host && norm(new URL(a.href).pathname) === norm(location.pathname)) {
+      a.classList.add("current");
+    }
+  
+    nav.append(a);
+  }
+  
+  /* 6. (Optional) minimal styling so links don’t stick together
+        – remove if you already have nav styles in CSS            */
+  nav.style.display = "flex";
+  nav.style.gap = "1rem";
