@@ -257,3 +257,38 @@ section ul li a:hover { color: canvastext; }
 .color-scheme select{
   font: inherit;            /* keep font consistent                   */
 }
+
+/* ----------------------------------------------------------
+   Contact‑form layout (picture 2 style)
+   ---------------------------------------------------------- */
+
+/* Constrain the overall width and centre it */
+.contact-wrapper {
+  max-width: 36rem;      /* ~576 px; adjust as you like */
+  margin-inline: auto;   /* centres the whole block */
+}
+
+/* Stack each label + control vertically, with spacing */
+#contact label {
+  display: block;
+  margin-block: 1rem;    /* space above/below each field */
+  font-weight: bold;
+}
+
+/* Make the controls fill the wrapper, not the viewport */
+#contact input,
+#contact textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font: inherit;
+  padding: 0.4em 0.6em;
+}
+
+/* Button sized to its text, centred */
+#contact button {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.6em 2.5em;
+  font: inherit;
+  cursor: pointer;
+}
