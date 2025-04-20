@@ -2,51 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact - Wenxi Li</title>
-  <!-- Link back up one directory to get style.css -->
+  <title>Contact – Wenxi Li</title>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <!--
-  <nav>
-    <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../projects/index.html">Projects</a></li>
-      <li><a href="../cv/index.html">CV</a></li>
-      <li><a href="index.html">Contact</a></li>
-      <li><a href="https://github.com/YourGitHubUsername" target="_blank">GitHub</a></li>
-    </ul>
-  </nav>
-  Navigation -->
 
-  <h1>Contact</h1>
+  <h1>Contact me</h1>
 
-  <!-- Contact Form -->
-  <form action="mailto:wel055@ucsd.edu" method="GET" enctype="text/plain">
-    <!-- Email field -->
-    <label for="email">Email:</label>
-    <input 
-      type="email" 
-      name="email" 
-      id="email" 
-    >
-    <br><br>
+  <!-- Better contact form: only Subject + Message -->
+  <form id="contact" action="mailto:wel055@ucsd.edu" method="get">
+    <label>Subject:
+      <input name="subject" required>
+    </label>
 
-    <!-- Subject field -->
-    <label for="subject">Subject:</label>
-    <input 
-      name="subject" 
-      id="subject" 
-    >
-    <br><br>
+    <label>Message:
+      <textarea name="body" rows="4" required></textarea>
+    </label>
 
-    <!-- Message body -->
-    <label for="body">Body:</label>
-    <textarea 
-      name="body" 
-      id="body" 
-    ></textarea>
-    <br><br>
+    <button>Send</button>
+  </form>
+
+  <!-- load the shared JS -->
+  <script type="module" src="../global.js"></script>
+</body>
+</html>
 
     <!-- Submit button -->
     <button>Submit</button>

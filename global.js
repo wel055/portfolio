@@ -109,3 +109,20 @@ document.body.insertAdjacentHTML(
       rootStyle.setProperty("color-scheme", mode); // force light or dark
     }
   }
+
+  const form = document.getElementById("contact");
+if (form) {
+  form.addEventListener("submit", e => {
+    e.preventDefault();                          // prevent normal HTTP submit
+    const data = new FormData(form);
+
+    /* Build query string with percent‑encoding */
+    const params = [];
+    for (const [name, value] of data) {
+      params.push(`${name}=${encodeURIComponent(value)}`);
+    }
+    const url = `${form.action}?${params.join("&")}`;
+
+    location.href = url;                         // open mail client
+  });
+}
