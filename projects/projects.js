@@ -1,6 +1,9 @@
 import { fetchJSON, renderProjects } from '../global.js';
 
-const projects      = await fetchJSON('../lib/projects.json');  // 1. fetch data
-const projectsContainer = document.querySelector('.projects'); // 2. select target
+const projects          = await fetchJSON('../lib/projects.json');
+const projectsContainer = document.querySelector('.projects');
 
 renderProjects(projects, projectsContainer, 'h2');
+
+const title = document.querySelector('.projects-title');
+if (title) title.textContent = `${projects.length} Projects`;
