@@ -109,3 +109,39 @@ document.body.insertAdjacentHTML(
       rootStyle.setProperty("color-scheme", mode); // force light or dark
     }
   }
+
+/* ── Load & render projects from lib/projects.json ───────── */
+
+export async function fetchJSON(url) {
+  try {
+    const response = await fetch(url);          // 1. fetch
+    if (!response.ok) {                         // 2. handle errors
+      throw new Error(`Failed to fetch projects: ${response.statusText}`);
+    }
+    const data = await response.json();         // 3. parse JSON
+    return data;
+  } catch (error) {
+    console.error("Error fetching or parsing JSON data:", error);
+  }
+}
+
+/* Run only on the Projects page */
+if (location.pathname.match(/\/projects(\/index\.html)?$/)) {
+  fetchJSON("../lib/projects.json").then(list => {
+    if (!list) return;                          // fetch failed
+    const container = document.querySelector(".projects");
+    if (!container) return;
+
+    /* minimal templating */
+    for (const { title, image, description } of list) {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<article>
+           <h2>${title}</h2>
+           <img src="${image}" alt="">
+           <p>${description}</p>
+         </article>`
+      );
+    }
+  });
+}

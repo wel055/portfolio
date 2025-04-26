@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Lorem ipsum dolor sit amet",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
+    },
+    {
+        "title": "Architecto minima sed omnis?",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
+    },
+    {
+        "title": "Asperiores rem repellendus",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
+    }
+]
