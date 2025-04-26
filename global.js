@@ -145,3 +145,26 @@ if (location.pathname.match(/\/projects(\/index\.html)?$/)) {
     }
   });
 }
+
+/* ----------  Lab 4 STEP 1.4 • renderProjects  ------------------------ */
+export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+  if (!Array.isArray(projects) || !containerElement) return;
+
+  /* 1 · Clear previous content */
+  containerElement.innerHTML = '';
+
+  /* 2 · Create an <article> for each project */
+  for (const project of projects) {
+    const article = document.createElement('article');
+
+    /* 3 · Populate with dynamic markup */
+    article.innerHTML = `
+      <${headingLevel}>${project.title}</${headingLevel}>
+      <img src="${project.image}" alt="${project.title}">
+      <p>${project.description}</p>
+    `;
+
+    /* 4 · Append to the container */
+    containerElement.appendChild(article);
+  }
+}
