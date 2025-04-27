@@ -15,51 +15,61 @@
       },
     {
         "title": "Lorem ipsum dolor sit amet",
+        "year": 2023,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
     },
     {
         "title": "Architecto minima sed omnis?",
+        "year": 2022,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
     },
     {
         "title": "Asperiores rem repellendus",
+        "year": 2022,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
     },
     {
         "title": "Lorem ipsum dolor sit amet",
+        "year": 2022,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
     },
     {
         "title": "Architecto minima sed omnis?",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
     },
     {
         "title": "Asperiores rem repellendus",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
     },
     {
         "title": "Lorem ipsum dolor sit amet",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
     },
     {
         "title": "Architecto minima sed omnis?",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
     },
     {
         "title": "Asperiores rem repellendus",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
     },
     {
         "title": "Asperiores rem repellendus",
+        "year": 2021,
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
     }
