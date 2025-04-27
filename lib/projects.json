@@ -1,5 +1,19 @@
 [
     {
+        "title": "Investigation on the Relationship Between Preparation Time and Rating of Recipes",
+        "year": 2024,
+        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+        "description": "A data-science study exploring how a recipe’s prep time correlates with its user rating, using Python for data wrangling, visualization and regression analysis.",
+        "url": "https://github.com/wel055/Investigation-on-the-Relationship-Between-Preparation-Time-and-Rating-of-Recipes"
+      },
+      {
+        "title": "CSE 151A Group Project",
+        "year": 2023,
+        "image": "https://dsc106.com/labs/lab02/images/empty.svg",
+        "description": "Course project applying classical machine-learning techniques to a real-world dataset; responsibilities included model selection, tuning and evaluation.",
+        "url": "https://github.com/two2012/CSE-151A-Group-Project"
+      },
+    {
         "title": "Lorem ipsum dolor sit amet",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
@@ -8,6 +22,41 @@
         "title": "Architecto minima sed omnis?",
         "image": "https://vis-society.github.io/labs/2/images/empty.svg",
         "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
+    },
+    {
+        "title": "Asperiores rem repellendus",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
+    },
+    {
+        "title": "Lorem ipsum dolor sit amet",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
+    },
+    {
+        "title": "Architecto minima sed omnis?",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
+    },
+    {
+        "title": "Asperiores rem repellendus",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
+    },
+    {
+        "title": "Lorem ipsum dolor sit amet",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet consequat arcu."
+    },
+    {
+        "title": "Architecto minima sed omnis?",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Vivamus commodo tincidunt neque, sit amet efficitur quam fringilla at."
+    },
+    {
+        "title": "Asperiores rem repellendus",
+        "image": "https://vis-society.github.io/labs/2/images/empty.svg",
+        "description": "Praesent a ornare arcu. Etiam congue cursus ex, quis scelerisque lacus condimentum ac."
     },
     {
         "title": "Asperiores rem repellendus",
