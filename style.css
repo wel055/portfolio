@@ -308,3 +308,26 @@ section ul li a:hover { color: canvastext; }
   margin-block: 2em;
   overflow: visible;
 }
+
+/* legend appearance */
+.legend {
+  list-style: none;
+  padding: 0;
+  margin-block: 1em 2em;
+  display: grid;
+  gap: .25em .75em;
+  grid-template-columns: repeat(auto-fill, minmax(8em, 1fr));
+  font: inherit;
+}
+.legend li {
+  display: flex;
+  align-items: center;
+  gap: .35em;
+}
+.legend .swatch {
+  inline-size: 1em;
+  block-size: 1em;
+  background: var(--color);
+  border-radius: 2px;
+  flex: none;
+}

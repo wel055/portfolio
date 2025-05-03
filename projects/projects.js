@@ -20,17 +20,21 @@ d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 /* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
 
-/* 1 · Dataset */
-let data = [1, 2, 3, 4, 5, 5];
-
-/* 2 · Create the slice generator (a.k.a. d3.pie ) */
-let sliceGenerator = d3.pie();
-
-/* 3 · Turn data into start / end angles */
-let arcData = sliceGenerator(data);
-
-/* 4 · Arc path generator (outer‑radius 50  ⇒ diameter 100 matches the SVG viewBox) */
-let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
+/* DATA WITH LABELS  ------------------------------------------------ */
+const data = [
+    { value: 1, label: 'Apples'   },
+    { value: 2, label: 'Oranges'  },
+    { value: 3, label: 'Mangos'   },
+    { value: 4, label: 'Pears'    },
+    { value: 5, label: 'Limes'    },
+    { value: 5, label: 'Cherries' },
+  ];
+  
+/* slice generator that knows each object’s value */
+const sliceGenerator = d3.pie().value(d => d.value);
+  
+/* convert to arc data and draw slices exactly like before */
+const arcData = sliceGenerator(data);
 
 /* 5 · Colour scale (10 nice categorical colours) */
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
@@ -43,3 +47,13 @@ d3.select('#projects-plot')
   .append('path')
     .attr('d', arcGenerator)
     .attr('fill', (_, i) => colors(i));
+
+/* LEGEND  ---------------------------------------------------------- */
+const legend = d3.select('.legend');
+
+data.forEach((d, idx) => {
+  legend
+    .append('li')
+    .attr('style', `--color:${colors(idx)}`)        // pass the colour
+    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
+});
