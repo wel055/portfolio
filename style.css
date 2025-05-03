@@ -331,3 +331,42 @@ section ul li a:hover { color: canvastext; }
   border-radius: 2px;
   flex: none;
 }
+
+/* pie + legend side‑by‑side */
+.viz{
+  display:flex;
+  gap:2rem;           /* space between chart and legend */
+  align-items:start;  /* top‑align */
+}
+
+/* limit chart size */
+#projects-plot{
+  max-width:20rem;
+  margin-block:2em;
+  overflow:visible;
+}
+
+/* legend list as grid */
+.legend{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(8em,1fr));
+  gap:1rem;
+}
+
+.legend li{
+  display:flex;
+  align-items:center;
+  gap:.5rem;       /* smaller than .legend gap */
+}
+
+/* coloured square */
+.legend .swatch{
+  width:1em;
+  aspect-ratio:1/1;
+  background:var(--color);
+  border-radius:3px; /* slight rounding */
+  display:inline-block;
+}
