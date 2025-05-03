@@ -17,3 +17,32 @@ let arc = d3.arc().innerRadius(0).outerRadius(50)({
   
 /* append it to our existing SVG */
 d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
+
+/* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
+
+// 1 · Data: ⅓ vs ⅔ (1 and 2)
+const data = [1, 2];
+
+// 2 · Arc generator (outer radius 50px, full pie)
+const arcGen = d3.arc().innerRadius(0).outerRadius(50);
+
+// 3 · Compute start/end angles **manually**
+let total = 0;
+for (const d of data) total += d;
+
+let angle = 0;
+const arcs = [];
+for (const d of data) {
+  const endAngle = angle + (d / total) * 2 * Math.PI;
+  arcs.push(arcGen({ startAngle: angle, endAngle }));
+  angle = endAngle;
+}
+
+// 4 · Draw each slice in its own <path>
+const colors = ['gold', 'purple'];       // slice 0, slice 1
+arcs.forEach((arc, idx) => {
+  d3.select('#projects-plot')
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', colors[idx]);
+});
