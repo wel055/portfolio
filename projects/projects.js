@@ -21,7 +21,7 @@ d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 /* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
 
 /* DATA WITH LABELS  ------------------------------------------------ */
-const data = [
+let data = [
     { value: 1, label: 'Apples'   },
     { value: 2, label: 'Oranges'  },
     { value: 3, label: 'Mangos'   },
@@ -31,10 +31,10 @@ const data = [
   ];
   
 /* slice generator that knows each object’s value */
-const sliceGenerator = d3.pie().value(d => d.value);
+let sliceGenerator = d3.pie().value(d => d.value);
   
 /* convert to arc data and draw slices exactly like before */
-const arcData = sliceGenerator(data);
+let arcData = sliceGenerator(data);
 
 /* 5 · Colour scale (10 nice categorical colours) */
 let colors = d3.scaleOrdinal(d3.schemeTableau10);
