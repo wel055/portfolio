@@ -9,15 +9,6 @@ renderProjects(projects, projectsContainer, 'h2');
 const title = document.querySelector('.projects-title');
 if (title) title.textContent = `${projects.length} Projects`;
 
-/* ---- arc with D3 ---- */
-let arc = d3.arc().innerRadius(0).outerRadius(50)({
-    startAngle: 0,
-    endAngle: 2 * Math.PI,
-  });
-  
-/* append it to our existing SVG */
-d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
-
 /* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
 
 /* DATA WITH LABELS  ------------------------------------------------ */
