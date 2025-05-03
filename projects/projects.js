@@ -20,29 +20,26 @@ d3.select('svg').append('path').attr('d', arc).attr('fill', 'red');
 
 /* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
 
-// 1 · Data: ⅓ vs ⅔ (1 and 2)
-const data = [1, 2];
+/* 1 · Dataset */
+let data = [1, 2, 3, 4, 5, 5];
 
-// 2 · Arc generator (outer radius 50px, full pie)
-const arcGen = d3.arc().innerRadius(0).outerRadius(50);
+/* 2 · Create the slice generator (a.k.a. d3.pie ) */
+let sliceGenerator = d3.pie();
 
-// 3 · Compute start/end angles **manually**
-let total = 0;
-for (const d of data) total += d;
+/* 3 · Turn data into start / end angles */
+let arcData = sliceGenerator(data);
 
-let angle = 0;
-const arcs = [];
-for (const d of data) {
-  const endAngle = angle + (d / total) * 2 * Math.PI;
-  arcs.push(arcGen({ startAngle: angle, endAngle }));
-  angle = endAngle;
-}
+/* 4 · Arc path generator (outer‑radius 50  ⇒ diameter 100 matches the SVG viewBox) */
+let arcGenerator = d3.arc().innerRadius(0).outerRadius(50);
 
-// 4 · Draw each slice in its own <path>
-const colors = ['gold', 'purple'];       // slice 0, slice 1
-arcs.forEach((arc, idx) => {
-  d3.select('#projects-plot')
-    .append('path')
-    .attr('d', arc)
-    .attr('fill', colors[idx]);
-});
+/* 5 · Colour scale (10 nice categorical colours) */
+let colors = d3.scaleOrdinal(d3.schemeTableau10);
+
+/* 6 · Render the slices */
+d3.select('#projects-plot')
+  .selectAll('path')
+  .data(arcData)
+  .enter()
+  .append('path')
+    .attr('d', arcGenerator)
+    .attr('fill', (_, i) => colors(i));
