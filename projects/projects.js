@@ -17,10 +17,11 @@ const legendUL          = d3.select('.legend');
 /* ───── 1 · general re‑render pipeline ───── */
 function refreshUI() {
 
-  /* 1 · filter by search query */
-  const searchFiltered = allProjects.filter(p =>
-      p.title.toLowerCase()       .includes(query) ||
-      p.description.toLowerCase() .includes(query));
+    const searchFiltered = allProjects.filter(p =>
+        p.title.toLowerCase().includes(query)           ||
+        p.description.toLowerCase().includes(query)     ||
+        p.year.toString().includes(query)               // ← NEW
+      );
 
   /* 2 · filter by active year (if any) */
   const visible = activeYear
@@ -31,14 +32,17 @@ function refreshUI() {
   renderProjects(visible, projectsContainer, 'h2');
 
   /* 4 · (pie + legend) */
-  drawPieAndLegend(visible);
+  drawPieAndLegend(allProjects);
 }
 
 /* ───── 2 · draw pie & legend from an array of projects ───── */
-function drawPieAndLegend(projectsGiven){
+function drawPieAndLegend(projectsAllYears){
 
   /* A · aggregate counts per year */
-  const rolled   = d3.rollups(projectsGiven, v=>v.length, d=>d.year);
+  const rolled = d3.rollups(
+    projectsAllYears,        // always full list
+    v => v.length,
+    d => d.year);
   const data     = rolled.map(([year,count]) => ({ label:year, value:count }));
 
   /* B · generators & scales (re‑created every time so they keep in sync) */
@@ -86,3 +90,15 @@ searchInput.addEventListener('input', e=>{
 
 /* first paint */
 refreshUI();
+
+if (selectedIndex === -1) {
+    /* No slice selected → show everything */
+    renderProjects(projects, projectsContainer, 'h2');
+  } else {
+    /* One slice (and legend item) is selected ───────────── */
+    const selectedYear = data[selectedIndex].label;   // the slice’s year
+    const filtered     = projects.filter(p => p.year === selectedYear);
+  
+    /* Re‑render only those projects that belong to that year */
+    renderProjects(filtered, projectsContainer, 'h2');
+  }
