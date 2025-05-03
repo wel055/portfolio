@@ -9,10 +9,9 @@ renderProjects(projects, projectsContainer, 'h2');
 const title = document.querySelector('.projects-title');
 if (title) title.textContent = `${projects.length} Projects`;
 
-/* ────── Lab 5Step 1.4 ·  Static pie chart with two slices ────── */
+/* ───  LAB 5 · Pie‑chart  ───────────────────────────────────────── */
 
-/* DATA WITH LABELS  ------------------------------------------------ */
-let data = [
+const data = [
     { value: 1, label: 'Apples'   },
     { value: 2, label: 'Oranges'  },
     { value: 3, label: 'Mangos'   },
@@ -21,30 +20,33 @@ let data = [
     { value: 5, label: 'Cherries' },
   ];
   
-/* slice generator that knows each object’s value */
-let sliceGenerator = d3.pie().value(d => d.value);
+  /* 1 · slice generator that reads d.value */
+  const sliceGenerator = d3.pie().value(d => d.value);
   
-/* convert to arc data and draw slices exactly like before */
-let arcData = sliceGenerator(data);
-
-/* 5 · Colour scale (10 nice categorical colours) */
-let colors = d3.scaleOrdinal(d3.schemeTableau10);
-
-/* 6 · Render the slices */
-d3.select('#projects-plot')
-  .selectAll('path')
-  .data(arcData)
-  .enter()
-  .append('path')
-    .attr('d', arcGenerator)
-    .attr('fill', (_, i) => colors(i));
-
-/* LEGEND  ---------------------------------------------------------- */
-const legend = d3.select('.legend');
-
-data.forEach((d, idx) => {
-  legend
-    .append('li')
-    .attr('style', `--color:${colors(idx)}`)        // pass the colour
-    .html(`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`);
-});
+  /* 2 · convert to arc‑data */
+  const arcData = sliceGenerator(data);
+  
+  /* 3 · arc generator (radius 50 – matches the SVG viewBox) */
+  const arcGenerator = d3.arc()
+    .innerRadius(0)      // pie (use >0 for donut)
+    .outerRadius(50);    // matches viewBox –50 –50 100 100
+  
+  /* 4 · nice categorical colour scale */
+  const colors = d3.scaleOrdinal(d3.schemeTableau10);
+  
+  /* 5 · render the slices */
+  d3.select('#projects-plot')
+    .selectAll('path')
+    .data(arcData)
+    .join('path')
+      .attr('d', arcGenerator)      // ← uses our generator
+      .attr('fill', (_, i) => colors(i));
+  
+  /* 6 · build the legend */
+  const legend = d3.select('.legend')
+    .selectAll('li')
+    .data(arcData)
+    .join('li')
+      .attr('style', (_, i) => `--color:${colors(i)}`)   // swatch colour
+      .html(d => `<span class="swatch"></span> ${d.data.label} <em>(${d.data.value})</em>`);
+  
