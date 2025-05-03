@@ -302,3 +302,9 @@ section ul li a:hover { color: canvastext; }
 #contact button:hover {
   background: oklch(90% 0 0 / 35%);
 }
+
+#projects-plot {
+  max-width: 20em;
+  margin-block: 2em;
+  overflow: visible;
+}
