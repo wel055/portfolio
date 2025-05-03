@@ -1,52 +1,88 @@
+/* ───────────── shared helpers ───────────── */
 import { fetchJSON, renderProjects } from '../global.js';
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7.9.0/+esm';
 
-const projects          = await fetchJSON('../lib/projects.json');
+/* ------------------------------------------ */
+/* state that must survive every re‑render    */
+let allProjects   = await fetchJSON('../lib/projects.json');
+let activeYear    = null;          // pie‑click filter (null = no filter)
+let query         = '';            // search bar text
+/* ------------------------------------------ */
+
 const projectsContainer = document.querySelector('.projects');
+const searchInput       = document.querySelector('.searchBar');
+const svg               = d3.select('#projects-plot');
+const legendUL          = d3.select('.legend');
 
-renderProjects(projects, projectsContainer, 'h2');
+/* ───── 1 · general re‑render pipeline ───── */
+function refreshUI() {
 
-const title = document.querySelector('.projects-title');
-if (title) title.textContent = `${projects.length} Projects`;
+  /* 1 · filter by search query */
+  const searchFiltered = allProjects.filter(p =>
+      p.title.toLowerCase()       .includes(query) ||
+      p.description.toLowerCase() .includes(query));
 
-/* ───  LAB 5 · Pie‑chart  ───────────────────────────────────────── */
+  /* 2 · filter by active year (if any) */
+  const visible = activeYear
+      ? searchFiltered.filter(p => p.year === activeYear)
+      : searchFiltered;
 
-const data = [
-    { value: 1, label: 'Apples'   },
-    { value: 2, label: 'Oranges'  },
-    { value: 3, label: 'Mangos'   },
-    { value: 4, label: 'Pears'    },
-    { value: 5, label: 'Limes'    },
-    { value: 5, label: 'Cherries' },
-  ];
-  
-  /* 1 · slice generator that reads d.value */
-  const sliceGenerator = d3.pie().value(d => d.value);
-  
-  /* 2 · convert to arc‑data */
-  const arcData = sliceGenerator(data);
-  
-  /* 3 · arc generator (radius 50 – matches the SVG viewBox) */
-  const arcGenerator = d3.arc()
-    .innerRadius(0)      // pie (use >0 for donut)
-    .outerRadius(50);    // matches viewBox –50 –50 100 100
-  
-  /* 4 · nice categorical colour scale */
-  const colors = d3.scaleOrdinal(d3.schemeTableau10);
-  
-  /* 5 · render the slices */
-  d3.select('#projects-plot')
-    .selectAll('path')
-    .data(arcData)
-    .join('path')
-      .attr('d', arcGenerator)      // ← uses our generator
-      .attr('fill', (_, i) => colors(i));
-  
-  /* 6 · build the legend */
-  const legend = d3.select('.legend')
-    .selectAll('li')
-    .data(arcData)
-    .join('li')
-      .attr('style', (_, i) => `--color:${colors(i)}`)   // swatch colour
-      .html(d => `<span class="swatch"></span> ${d.data.label} <em>(${d.data.value})</em>`);
-  
+  /* 3 · (cards) */
+  renderProjects(visible, projectsContainer, 'h2');
+
+  /* 4 · (pie + legend) */
+  drawPieAndLegend(visible);
+}
+
+/* ───── 2 · draw pie & legend from an array of projects ───── */
+function drawPieAndLegend(projectsGiven){
+
+  /* A · aggregate counts per year */
+  const rolled   = d3.rollups(projectsGiven, v=>v.length, d=>d.year);
+  const data     = rolled.map(([year,count]) => ({ label:year, value:count }));
+
+  /* B · generators & scales (re‑created every time so they keep in sync) */
+  const pie   = d3.pie().value(d => d.value);
+  const arcs  = pie(data);
+  const arc   = d3.arc().innerRadius(0).outerRadius(50);
+  const color = d3.scaleOrdinal(d3.schemeTableau10);
+
+  /* C · clear old viz */
+  svg.selectAll('*').remove();
+  legendUL.selectAll('*').remove();
+
+  /* D · draw slices */
+  svg.selectAll('path')
+     .data(arcs)
+     .enter()
+     .append('path')
+       .attr('d', arc)
+       .attr('fill', (_,i)=>color(i))
+       .classed('selected', d => d.data.label === activeYear)
+       .on('click', (_,d)=>{
+          activeYear = (activeYear === d.data.label) ? null : d.data.label;
+          refreshUI();
+       });
+
+  /* E · legend (ul > li) */
+  legendUL.selectAll('li')
+     .data(data)
+     .enter()
+     .append('li')
+       .attr('style',(_,i)=>`--color:${color(i)}`)
+       .classed('selected', d => d.label === activeYear)
+       .html(d=>`<span class="swatch"></span> ${d.label} <em>(${d.value})</em>`)
+       .on('click', (_,d)=>{
+          activeYear = (activeYear === d.label) ? null : d.label;
+          refreshUI();
+       });
+}
+
+/* ───── 3 · live search bar ───── */
+searchInput.addEventListener('input', e=>{
+  query = e.target.value.toLowerCase().trim();
+  refreshUI();
+});
+
+/* first paint */
+refreshUI();

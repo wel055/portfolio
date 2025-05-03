@@ -337,6 +337,7 @@ section ul li a:hover { color: canvastext; }
   display:flex;
   gap:2rem;           /* space between chart and legend */
   align-items:start;  /* top‑align */
+  flex-wrap: wrap;
 }
 
 /* limit chart size */
@@ -348,16 +349,17 @@ section ul li a:hover { color: canvastext; }
 
 /* legend list as grid */
 .legend{
+  flex: 1;
   list-style:none;
   margin:0;
   padding:0;
-  display:grid;
+  display: grid;
   grid-template-columns:repeat(auto-fill,minmax(8em,1fr));
   gap:1rem;
 }
 
 .legend li{
-  display:flex;
+  display: flex;
   align-items:center;
   gap:.5rem;       /* smaller than .legend gap */
 }
@@ -369,4 +371,20 @@ section ul li a:hover { color: canvastext; }
   background:var(--color);
   border-radius:3px; /* slight rounding */
   display:inline-block;
+}
+
+/* 1 · animate any opacity changes on the wedges ─────────────────── */
+#projects-plot path{
+  transition: opacity .3s;
+}
+
+/* 2 · fade‑out all *other* slices while one slice is hovered ────── */
+#projects-plot:has(path:hover) path:not(:hover){
+  opacity:.45;          /* tweak the %. Smaller = darker fade */
+}
+
+/* highlighted slice + matching legend item */
+.selected{
+  --color: oklch(65% 40% 0);          /* any distinct colour */
+  fill: var(--color) !important;      /* override slice fill */
 }
