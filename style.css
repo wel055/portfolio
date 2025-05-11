@@ -399,12 +399,87 @@ section ul li a:hover { color: canvastext; }
   gap:.5rem 1.5rem;
 }
 .stats dt {
-  font: 700 .75rem/1.2 system-ui, sans-serif;
-  letter-spacing:.03em;
+  font: 400 .75rem/1.2 system-ui, sans-serif;
+  letter-spacing:.1em;
   color:var(--gray-600, #637);
   text-transform:uppercase;
 }
 .stats dd {
   margin:0 0 1.25rem 0;
-  font: 600 1.8rem/1.2 system-ui, sans-serif;
+  font: 400 1.8rem/1.2 system-ui, sans-serif;
 }
+
+/* ---------- tooltip layout ----------------------------------- */
+dl.info {
+  display:grid;
+  grid-template-columns:auto 1fr;      /* <dt> left, <dd> right   */
+  gap:.25rem 1.5rem;
+  margin:0;
+}
+
+dl.tooltip {
+  position:fixed;
+  top:1rem;
+  left:1rem;
+  background:#fff;
+  padding:.75rem 1rem;
+  border:1px solid #ddd;
+  border-radius:.5rem;
+  box-shadow:0 1px 4px rgb(0 0 0 / .1);
+  font-size:.875rem;
+  opacity:0;                           /* start hidden            */
+  pointer-events:none;                 /* ignore pointer          */
+  transition:opacity .15s;
+}
+
+/* ---------- hover effect on dots ----------------------------- */
+circle{
+  transition:200ms;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+circle:hover{ transform:scale(1.5); }
+
+/* ---- tooltip look ------------------------------------------------- */
+dl.tooltip{
+  position:fixed;               /* always on‐screen                 */
+  top:1rem; left:1rem;
+  padding:.75rem 1rem;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  border-radius:6px;
+  backdrop-filter:blur(6px);
+  transition:opacity .25s, visibility .25s;
+}
+dl.info{                         /* grid layout for dt / dd          */
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:.25rem .75rem;
+}
+dl.info dt{color:#666;margin:0}
+dl.info dd{margin:0}
+
+/* hide + fade ------------------------------------------------------- */
+dl.info[hidden]:not(:hover,:focus-within){
+  opacity:0;                    /* fade while hidden                */
+  visibility:hidden;
+}
+
+/* dot hover enlargement -------------------------------------------- */
+circle{
+  transition:200ms transform;
+  transform-origin:center;
+  transform-box:fill-box;
+}
+circle:hover{transform:scale(1.5);}
+
+circle.selected {
+  stroke: #ff6b6b;
+  stroke-width: 2px;
+  fill-opacity: 1;
+}
+
+dl.info { transition: opacity 200ms; }
+dl.info[hidden]:not(:hover,:focus-within) { opacity:0; visibility:hidden; }
+
+circle.selected { stroke:#ff6b6b; stroke-width:2px; }
