@@ -1,0 +1,11 @@
+# third-party packages installed with npm / pnpm / yarn
+node_modules/
+
+# build artefacts (if you ever add them)
+dist/
+build/
+
+# system / editor clutter (harmless but noisy)
+.DS_Store
+Thumbs.db
+*.log

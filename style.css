@@ -388,3 +388,23 @@ section ul li a:hover { color: canvastext; }
   --color: oklch(65% 40% 0);          /* any distinct colour */
   fill: var(--color) !important;      /* override slice fill */
 }
+
+.stats { display:grid; grid-template-columns:auto 1fr; gap:.5rem 2rem; }
+.stats dt { font-weight:600; text-transform:uppercase; font-size:.8rem; }
+.stats dd { margin:0; }
+
+.stats {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap:.5rem 1.5rem;
+}
+.stats dt {
+  font: 700 .75rem/1.2 system-ui, sans-serif;
+  letter-spacing:.03em;
+  color:var(--gray-600, #637);
+  text-transform:uppercase;
+}
+.stats dd {
+  margin:0 0 1.25rem 0;
+  font: 600 1.8rem/1.2 system-ui, sans-serif;
+}
