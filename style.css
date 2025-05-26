@@ -483,3 +483,23 @@ dl.info { transition: opacity 200ms; }
 dl.info[hidden]:not(:hover,:focus-within) { opacity:0; visibility:hidden; }
 
 circle.selected { stroke:#ff6b6b; stroke-width:2px; }
+
+#stats-wrapper{
+  display:flex;
+  gap:1rem;
+  border:1px dashed #999;
+}
+
+/* The element in question */
+#stats-label{
+  /* acts as a FLEX ITEM inside .wrapper */
+  flex:1;                   /* take remaining width */
+
+  /* acts as a FLEX CONTAINER for its own children */
+  display:flex;
+  align-items:baseline;     /* children line up on their text baselines */
+}
+
+#commit-time {
+  margin-left: auto;      /* pushes this item to the far right */
+}

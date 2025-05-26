@@ -18,6 +18,13 @@
   </dl>
   <p id="selection-count">No commits selected</p>
   <dl id="language-breakdown" class="stats"></dl>
+  <div id="stats-wrapper">
+    <label id="commit-filter" style="display:flex;align-items:baseline;gap:.5rem">
+      Show commits until:
+      <input id="commit-progress" type="range" min="0" max="100" value="100" style="flex:1">
+      <time id="commit-time"></time>
+    </label>
+  </div>
   <!-- placeholder for the stats -->
   <div id="stats"></div>
 
@@ -25,5 +32,6 @@
   <script type="module" src="../global.js"></script>
   <!-- code-analysis visualisation -->
   <script type="module" src="main.js"></script>
+  <script type="module" src="meta.js"></script>
 </body>
 </html>

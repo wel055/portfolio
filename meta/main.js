@@ -218,7 +218,17 @@ function renderScatterPlot(data, commits) {
     yScale = d3.scaleLinear()
                     .domain([0, 24])
                     .range([usableArea.bottom, usableArea.top]);
-  
+    svg
+                    .append('g')
+                    .attr('transform', `translate(0, ${usableArea.bottom})`)
+                    .attr('class', 'x-axis') // new line to mark the g tag
+                    .call(xAxis);
+                
+    svg
+                    .append('g')
+                    .attr('transform', `translate(${usableArea.left}, 0)`)
+                    .attr('class', 'y-axis') // just for consistency
+                    .call(yAxis);
     /* ───── 4. grid lines (behind everything) ───── */
     svg.selectAll('.gridlines')
        .data([null])
