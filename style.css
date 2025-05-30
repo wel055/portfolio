@@ -247,8 +247,8 @@ section ul li a:hover { color: canvastext; }
 /* switcher = <label class="color‑scheme"><select>… */
 .color-scheme{
   position: fixed;          /* stay in viewport even when scrolling   */
-  top: 1rem;                /* 1 rem from the top                     */
-  right: 1rem;              /* 1 rem from the right edge              */
+  top: 1rem;                /* 1  rem from the top                     */
+  right: 1rem;              /* 1  rem from the right edge              */
   font: 80%/1 inherit;      /* slightly smaller, same font as body    */
   color: canvastext;        /* adapts automatically in dark / light   */
   z-index: 1000;            /* sit above everything else              */
@@ -259,12 +259,12 @@ section ul li a:hover { color: canvastext; }
 }
 
 /* ----------------------------------------------------------
-   Contact‑form layout (picture 2 style)
+   Contact‑form layout (picture 2 style)
    ---------------------------------------------------------- */
 
 /* Constrain the overall width and centre it */
 .contact-wrapper {
-  max-width: 36rem;      /* ~576 px; adjust as you like */
+  max-width: 36rem;      /* ~576 px; adjust as you like */
   margin-inline: auto;   /* centres the whole block */
 }
 
@@ -434,15 +434,18 @@ dl.tooltip {
 
 /* ---------- hover effect on dots ----------------------------- */
 circle{
-  transition:200ms;
+  @starting-style {
+    r: 0;
+  }
+  transition:200ms transform;
   transform-origin:center;
   transform-box:fill-box;
 }
-circle:hover{ transform:scale(1.5); }
+circle:hover{transform:scale(1.5);}
 
 /* ---- tooltip look ------------------------------------------------- */
 dl.tooltip{
-  position:fixed;               /* always on‐screen                 */
+  position:fixed;               /* always on‑screen                 */
   top:1rem; left:1rem;
   padding:.75rem 1rem;
   background:rgba(255,255,255,.9);
@@ -467,6 +470,9 @@ dl.info[hidden]:not(:hover,:focus-within){
 
 /* dot hover enlargement -------------------------------------------- */
 circle{
+  @starting-style {
+    r: 0;
+  }
   transition:200ms transform;
   transform-origin:center;
   transform-box:fill-box;
@@ -502,4 +508,44 @@ circle.selected { stroke:#ff6b6b; stroke-width:2px; }
 
 #commit-time {
   margin-left: auto;      /* pushes this item to the far right */
+}
+
+#files {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+
+  > div {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  dt {
+    grid-column: 1;
+  }
+
+  dd {
+    grid-column: 2;
+  }
+}
+
+/* lab 8 step 2 */
+.loc {
+  display: flex;
+  width: 0.5em;
+  aspect-ratio: 1;          /* makes it square */
+  background: steelblue;
+  border-radius: 50%;
+}
+
+/* let the dots wrap tightly inside the <dd> cell */
+dd {
+  grid-column: 2;           /* already there in Step 1 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: start;
+  align-content: start;
+  gap: 0.15em;
+  padding-top: 0.6em;
+  margin-left: 0;
 }
