@@ -90,14 +90,16 @@ function updateScatterPlot (commitsForPlot) {
       .attr('fill','steelblue')
       .style('fill-opacity',0.7);
 }
-
+const colors = d3.scaleOrdinal(d3.schemeTableau10);
 /* ──── file-list helper ──── */
 function updateFileDisplay (commitsArr) {
   // one object per file
   const files = d3.groups(
-                   commitsArr.flatMap(d => d.lines),
-                   d => d.file
-                 ).map(([name, lines]) => ({ name, lines }));
+    commitsArr.flatMap(d => d.lines),      // one element per LOC
+    d => d.file                            // group by filename
+  )
+  .map(([name, lines]) => ({ name, lines }))
+  .sort((a, b) => b.lines.length - a.lines.length);
 
   /* ── 1.  main rows ───────────────────────────── */
   const filesContainer = d3.select('#files')
@@ -125,11 +127,12 @@ function updateFileDisplay (commitsArr) {
 
   /* ── 3.  dots (unit-viz) ─────────────────────── */
   filesContainer.select('dd')
-    .selectAll('div')                       // one div per **line**
-    .data(d => d.lines)
-    .join('div')
-    .attr('class', 'loc');                  // round blue dot
-}
+  .selectAll('div')
+  .data(d => d.lines)
+  .join('div')
+  .attr('class', 'loc')
+  .style('background', d => colors(d.type));   // ⬅ NEW
+                            }
 
 /* ──── kick-off ──── */
 updateScatterPlot(filteredCommits);

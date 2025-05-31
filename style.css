@@ -533,8 +533,8 @@ circle.selected { stroke:#ff6b6b; stroke-width:2px; }
 .loc {
   display: flex;
   width: 0.5em;
-  aspect-ratio: 1;          /* makes it square */
-  background: steelblue;
+  aspect-ratio: 1;
+  background: var(--dot-color, steelblue);    /* default if JS hasn’t run */
   border-radius: 50%;
 }
 
